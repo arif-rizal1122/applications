@@ -1,0 +1,5 @@
+
+models = models ini adalah perantara anatara db dan webisite kita
+
+
+collection adalah pembungkus dalam sebuah array yg membuat array jadi lebih overpower
