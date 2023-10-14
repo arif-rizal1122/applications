@@ -59,5 +59,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    // ini fungsi agar slug bisa digunakan mengunakan route::resource
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }
 

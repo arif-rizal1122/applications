@@ -92,7 +92,7 @@ class postController extends Controller
     {
         return view('home', [
             "title" => "home",
-            "active" => "About"
+            "active" => "Home"
         ]);
     }
 
