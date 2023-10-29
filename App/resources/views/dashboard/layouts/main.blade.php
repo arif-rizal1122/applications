@@ -14,6 +14,22 @@
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
 
+        {{-- trix editor --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
+        
+        <style>
+          trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none;
+          }
+
+        document.addEventListener('trix-file-accept', function(e){
+          e.preventDefault();
+        })
+
+        </style>
+
+
 
   </head>
   <body>
@@ -23,14 +39,17 @@
 
 <div class="container-fluid">
   <div class="row">
+
+
  
     @include('dashboard.layouts.sidebar')
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-      @yield('containerPosts')
-      
+        @yield('container')
+        
     </main>
+  
 
   </div>
 </div>

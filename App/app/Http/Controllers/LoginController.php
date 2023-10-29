@@ -20,7 +20,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
             $credentials =  $request->validate([
-            'email' => 'required|email:dns',
+            'email' => 'required|email',
             'password' => 'required|'
         ]); 
 
@@ -49,7 +49,7 @@ class LoginController extends Controller
         // bikin yg baru supaya gak dibajak
         $request->session()->regenerateToken();
         // lalu balik mau ke halama mana
-        return redirect('/');
+        return redirect('/login');
     }
 
 }

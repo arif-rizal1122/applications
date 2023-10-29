@@ -10,12 +10,13 @@
   {{-- ini mengunakan method get --}}
   <div class="row justify-content-center mb-3">
     <div class="col-md-6">
-      <form action="/posts">
+      <form action="/posts" method="get">
 
 
         @if (request('category'))
             <input type="hidden" name="category" value="{{ request('category') }}">
         @endif
+        
         @if (request('author'))
         <input type="hidden" name="author" value="{{ request('author') }}">
         @endif
@@ -35,14 +36,23 @@
   {{-- ambil $posts terus hitung --}}
   @if ($posts->count())
   <div class="card mb-3">
-    <img src="https://picsum.photos/100/50?{{ $posts[0]->category->name }}" class="card-img-top" alt="{{ $posts[0]->category->name }}">
+     
+    @if ($posts[0]->image)
+    <div style="max-height: 350px; overflow:hidden;">
+    <img src="{{ asset('storage/' . $posts[0]->image) }}" alt="{{ $posts[0]->category }}" class="img-fluid">
+    </div>
+     @else    
+     <img src="https://picsum.photos/100/50?{{ $posts[0]->category->name }}" class="card-img-top" alt="{{ $posts[0]->category->name }}">      
+    @endif
+
+
     <div class="card-body text-center">
       <h3 class="card-title"><a href="/posts/{{ $posts[0]->slug }}" class="text-decoration-none text-dark">{{ $posts[0]->title }}</a></h3>
 
       <p>
          <small class="text-body-secondary">
 
-         by : <a href="/posts?author={{ $posts[0]->author->username  }}" class="text-decoration-none">{{ $posts[0]->author->name }}</a> in <a href="/posts?category={{ $posts[0]->category->slug }}" class="text-decoration-none">{{ $posts[0]->category->name }} </a> {{ $posts[0]->created_at->diffForHumans() }}
+         by : <a href="/posts?author={{ $posts[0]->author->username }}" class="text-decoration-none">{{ $posts[0]->author->name }}</a> in <a href="/posts?category={{ $posts[0]->category->slug }}" class="text-decoration-none">{{ $posts[0]->category->name }} </a> {{ $posts[0]->created_at->diffForHumans() }}
          </small>
       </p>  
 
@@ -83,7 +93,16 @@
 
           <div class="position-absolute bg-dark p-3 text-white"><a href="/posts?category={{ $post->category->slug }}" class="text-white text-decoration-none">{{ $post->category->name }}</a></div>
 
-          <img src="https://picsum.photos/500/500?{{ $post->category->name }}" class="card-img-top" alt="{{ $post->category->name }}">
+           
+      @if ($post->image)
+
+      <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category }}" class="img-fluid">
+
+       @else    
+       <img src="https://picsum.photos/500/500?{{ $post->category->name }}" class="card-img-top" alt="{{ $post->category->name }}">     
+      @endif
+
+
           <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
 
